@@ -4,12 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Webpack Starter Kit</title>
+    <title>Image Finder</title>
   </head>
 
   <body>
-    <article class="intro">
-      <h1>Webpack starter kit</h1>
-    </article>
+    <form class="search-form" id="search-form">
+      <input
+        type="text"
+        name="query"
+        autocomplete="off"
+        placeholder="Search images..."
+      />
+      <button type="submit" class="button js-button">Search</button>
+    </form>
+
+    <ul class="gallery"></ul>
+
+    <button
+      type="button"
+      class="button button-load-more is-hiden"
+      data-action="load-more"
+    >
+      Load more
+    </button>
   </body>
 </html>

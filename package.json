@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.6",
+    "material-design-icons": "^3.0.1"
   }
 }
