@@ -21,6 +21,7 @@ export function onForm(e) {
     searchBtn.spinnerOff();
     loadMoreBtn.show();
   });
+  e.currentTarget.reset();
 }
 
 export function onLoadMore() {

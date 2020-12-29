@@ -17,6 +17,10 @@ body {
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
@@ -92,6 +96,15 @@ img {
   border-radius: 5%;
   border: crimson solid 2px;
   overflow: hidden;
+
+  transition: transform cubic-bezier(0.4, 0, 0.2, 1) 250ms;
+}
+.gallery > li:hover {
+  transform: scale(1.03);
+}
+
+.gallery img:hover {
+  cursor: zoom-in;
 }
 
 .stats {
