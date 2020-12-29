@@ -68,9 +68,9 @@ img {
   margin-right: auto;
 }
 
-/* .is-hiden {
+.is-hiden {
   display: none;
-} */
+}
 
 .gallery {
   display: grid;
