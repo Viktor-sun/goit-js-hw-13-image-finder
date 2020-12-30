@@ -32,7 +32,7 @@ export function onForm(e) {
     }
     // =================================================================
     // для бесконечной загрузки
-    else {
+    if (hits.length + 12 * (imagesApiService.page - 1) !== totalHits) {
       io.observe(gallery.lastElementChild);
     }
     // =================================================================
@@ -55,7 +55,7 @@ function onEnter(entries, observer) {
         appendMarkup(hits);
         loadMoreBtn.spinnerOff();
 
-        if (!hits.length + 12 * (imagesApiService.page - 1) === totalHits) {
+        if (hits.length + 12 * (imagesApiService.page - 1) !== totalHits) {
           observer.observe(gallery.lastElementChild);
         } else {
           notifications.alertEnd();
