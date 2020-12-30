@@ -1,8 +1,10 @@
 import 'basicLightbox/dist/basicLightbox.min.css';
 import * as basicLightbox from 'basiclightbox';
 import refs from './refs';
+import notifications from './notifications';
 
 refs.gallery.addEventListener('click', onGallery);
+
 function onGallery(e) {
   if (e.target.nodeName !== 'IMG') return;
 
@@ -15,6 +17,7 @@ function onGallery(e) {
 `,
     {
       onShow(instance) {
+        notifications.notice();
         refs.body.classList.add('modal-open');
         window.addEventListener('keydown', e => onPressKey(e, instance));
       },
