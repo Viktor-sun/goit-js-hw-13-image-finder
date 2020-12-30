@@ -8,18 +8,21 @@ defaultModules.set(PNotifyMobile, {});
 
 export default {
   sucess() {
-    success({ title: 'Success search!' });
+    success({ title: 'Success search!', delay: 1000 });
   },
   error() {
     error({ title: 'Not Found', text: 'Please enter again.' });
   },
   info() {
-    info({ title: 'Please, more images.' });
+    info({ title: 'Please, more images.', delay: 1000 });
   },
   notice() {
     notice({ title: 'Awesome big image.' });
   },
   alert() {
     alert({ title: 'Common search!' });
+  },
+  alertEnd() {
+    alert({ title: 'Warning!', text: 'Images ended!' });
   },
 };

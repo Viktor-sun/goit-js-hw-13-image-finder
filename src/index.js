@@ -7,4 +7,4 @@ import { onForm, onLoadMore } from './js/handles';
 import refs from './js/refs';
 
 refs.form.addEventListener('submit', onForm);
-// refs.loadMore.addEventListener('click', onLoadMore);
+// refs.loadMore.addEventListener('click', onLoadMore);  // добавляет кнопку load more

@@ -18,7 +18,7 @@ export function onForm(e) {
   searchBtn.spinnerOn();
   clearImgContainer();
   imagesApiService.resetPage();
-  imagesApiService.fetchImg().then(hits => {
+  imagesApiService.fetchImg().then(({ hits, totalHits }) => {
     if (hits.length === 0) notifications.error();
     else if (hits.length > 1) notifications.sucess();
 
@@ -26,7 +26,16 @@ export function onForm(e) {
     searchBtn.spinnerOff();
     loadMoreBtn.show();
 
-    io.observe(gallery.lastElementChild); // для бесконечной загрузки
+    if (hits.length + 12 * (imagesApiService.page - 1) === totalHits) {
+      notifications.alertEnd();
+      loadMoreBtn.hide();
+    }
+    // =================================================================
+    // для бесконечной загрузки
+    else {
+      io.observe(gallery.lastElementChild);
+    }
+    // =================================================================
   });
   e.currentTarget.reset();
 }
@@ -41,12 +50,17 @@ function onEnter(entries, observer) {
     if (entry.isIntersecting) {
       loadMoreBtn.spinnerOn();
       imagesApiService.incrementPage();
-      imagesApiService.fetchImg().then(hits => {
+      imagesApiService.fetchImg().then(({ hits, totalHits }) => {
         notifications.info();
         appendMarkup(hits);
         loadMoreBtn.spinnerOff();
 
-        observer.observe(gallery.lastElementChild);
+        if (!hits.length + 12 * (imagesApiService.page - 1) === totalHits) {
+          observer.observe(gallery.lastElementChild);
+        } else {
+          notifications.alertEnd();
+          loadMoreBtn.hide();
+        }
       });
       observer.unobserve(entry.target);
     }
@@ -58,10 +72,15 @@ function onEnter(entries, observer) {
 export function onLoadMore() {
   loadMoreBtn.spinnerOn();
   imagesApiService.incrementPage();
-  imagesApiService.fetchImg().then(hits => {
+  imagesApiService.fetchImg().then(({ hits, totalHits }) => {
     notifications.info();
     appendMarkup(hits);
     loadMoreBtn.spinnerOff();
+
+    if (hits.length + 12 * (imagesApiService.page - 1) === totalHits) {
+      notifications.alertEnd();
+      loadMoreBtn.hide();
+    }
 
     window.scrollTo({
       top: document.documentElement.offsetHeight,
