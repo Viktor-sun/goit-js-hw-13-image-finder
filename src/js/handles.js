@@ -25,9 +25,35 @@ export function onForm(e) {
     appendMarkup(hits);
     searchBtn.spinnerOff();
     loadMoreBtn.show();
+
+    io.observe(gallery.lastElementChild); // для бесконечной загрузки
   });
   e.currentTarget.reset();
 }
+
+// ======================================================
+// Бесконечная загрузка
+
+const io = new IntersectionObserver(onEnter);
+
+function onEnter(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      loadMoreBtn.spinnerOn();
+      imagesApiService.incrementPage();
+      imagesApiService.fetchImg().then(hits => {
+        notifications.info();
+        appendMarkup(hits);
+        loadMoreBtn.spinnerOff();
+
+        observer.observe(gallery.lastElementChild);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}
+
+// =====================================================
 
 export function onLoadMore() {
   loadMoreBtn.spinnerOn();
